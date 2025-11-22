@@ -1,0 +1,27 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+@using Microsoft.AspNetCore.Localization
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+@code{
+    [Inject]
+    private IHttpContextAccessor HttpContextAccessor { get; set; }
+
+    private IRequestCultureFeature GetRequestCultureFeature()
+    {
+        return HttpContextAccessor.HttpContext.Features.Get<IRequestCultureFeature>();
+    }
+}
+
+<br />
+Provider: @GetRequestCultureFeature().Provider
+<br />
+Culture: @GetRequestCultureFeature().RequestCulture.Culture
+<br />
+UICulture: @GetRequestCultureFeature().RequestCulture.UICulture
